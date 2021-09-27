@@ -1,19 +1,25 @@
 #!/usr/bin/python3
+
+'''
+Documentación biblioteca
+pip3 install pyperclip
+https://pyperclip.readthedocs.io/en/latest/
+Si da "Not implemented Error"
+
+sudo apt-get install xsel #to install the xsel utility.
+sudo apt-get install xclip #to install the xclip utility.
+pip install gtk #to install the gtk Python module.
+pip install PyQt4 #to install the PyQt4 Python modu
+
+'''
+
 import pyperclip as pc
 import subprocess
 
 import time
-
-recent_value = ""
-while (True):
-
-    while True:
-        tmp_value = pc.paste()
-        if tmp_value != recent_value:
-            recent_value = tmp_value
-            print("Value changed: %s" % str(recent_value)[:20])
-            break
-        time.sleep(0.1)
+while True:
+    tmp_value= pc.waitForNewPaste()
+    time.sleep(0.1)
     #Obtenemos datos del portapapeles
     datos = pc.paste()
     cadena="./traducir.sh '"+datos.strip()+"'"
