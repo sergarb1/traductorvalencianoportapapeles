@@ -5,7 +5,7 @@ Documentación biblioteca
 pip3 install pyperclip
 https://pyperclip.readthedocs.io/en/latest/
 Si da "Not implemented Error"
-
+sudo apt-get install curl #to install curl
 sudo apt-get install xsel #to install the xsel utility.
 sudo apt-get install xclip #to install the xclip utility.
 pip install gtk #to install the gtk Python module.
@@ -21,8 +21,8 @@ while True:
     tmp_value= pc.waitForNewPaste()
     time.sleep(0.1)
     #Obtenemos datos del portapapeles
-    datos = pc.paste()
-    cadena="./traducir.sh '"+datos.strip()+"'"
+    datos = pc.paste().strip()
+    cadena="curl -F \"MAX_FILE_SIZE1=10000000\" -F \"ua_memories=true\" -F \"terminology_file=0\" -F \"cuadrotexto="+datos+"\" -F \"marcar=0\" -F \"direccion=spa-cat_valencia_uni\" https://apertium.ua.es/tradtexto.php"
     print(cadena)
     traduccion = subprocess.check_output(cadena, shell=True).decode('utf-8')
 
