@@ -22,14 +22,13 @@ import sys
 from platform import platform
 import pyperclip as pc
 import subprocess
-
 import time
 while True:
     tmp_value= pc.waitForNewPaste()
     time.sleep(0.1)
     #Obtenemos datos del portapapeles
     datos = pc.paste().strip()
-    datos = strip_accents(datos)
+    datos = strip_accents(datos).replace("\n","")
     cadena="curl -F \"MAX_FILE_SIZE1=10000000\" -F \"ua_memories=true\" -F \"terminology_file=0\" -F \"cuadrotexto="+datos+"\" -F \"marcar=0\" -F \"direccion=spa-cat_valencia_uni\" https://apertium.ua.es/tradtexto.php"
     print(cadena)
     traduccion = subprocess.check_output(cadena, shell=True).decode(sys.stdout.encoding)
